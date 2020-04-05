@@ -161,9 +161,7 @@ namespace Lab05.ViewModels
         private  void Sort(object o, int i)
         {
             _sortingType = i;
-           
-            
-                switch (i)
+            switch (i)
                 {
                     case 0:
                         Processes = new ObservableCollection<LabProcess>(from proc in Processes orderby proc.Id select proc);
@@ -202,9 +200,6 @@ namespace Lab05.ViewModels
                         OnPropertyChanged();
                         break;
                 }
-               
-        
-            
         }
 
         public RelayCommand<object> EndProcessCommand
@@ -253,7 +248,6 @@ namespace Lab05.ViewModels
                         MessageBox.Show(e.Message);
                     }
                 },_token);
-                
         }
     }
 }

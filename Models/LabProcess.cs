@@ -7,7 +7,7 @@ namespace Lab05.Models
 {
     public class LabProcess
     {
-        private Process _process;
+        private readonly Process _process;
         private float _cpu;
         private ObservableCollection<LabModule> _modules;
         private ObservableCollection<LabThread> _threads;

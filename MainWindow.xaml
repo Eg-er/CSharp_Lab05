@@ -29,12 +29,12 @@
                     <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" />
                     <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}" />
                     <DataGridTextColumn Header="Active" Binding="{Binding Path=Active}" />
-                    <DataGridTextColumn Header="CPU usage" Binding="{Binding Path=Cpu}" />
-                    <DataGridTextColumn Header="Memory usage" Binding="{Binding Path=Memory}" />
+                    <DataGridTextColumn Header="CPU %" Binding="{Binding Path=Cpu}" />
+                    <DataGridTextColumn Header="RAM usage" Binding="{Binding Path=Memory}" />
                     <DataGridTextColumn Header="Threads count" Binding="{Binding Path=ThreadsNumber}" />
                     <DataGridTextColumn Header="User" Binding="{Binding Path=User}" />
                     <DataGridTextColumn Header="Path" Binding="{Binding Path=Path}" />
-                    <DataGridTextColumn Header="Activity date" Binding="{Binding Path=Launch}" />
+                    <DataGridTextColumn Header="Started" Binding="{Binding Path=Launch}" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
