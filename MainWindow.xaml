@@ -1,0 +1,95 @@
+﻿<Window x:Class="Lab05.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab05"
+        mc:Ignorable="d"
+       
+    Title="MainWindow" Height="960" Width="1280">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30*"></ColumnDefinition>
+            <ColumnDefinition Width="20*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        <Grid Column="0">
+            <DataGrid x:Name="ProcessesDataGrid"
+                      HorizontalGridLinesBrush="DarkBlue"
+                      CanUserSortColumns="False"
+                      AutoGenerateColumns="False" Foreground="Black" FontSize="12" MaxColumnWidth="200"
+                      ItemsSource="{Binding Processes, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding Selected, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Open File Location" Command="{Binding OpenCommand}"/>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" />
+                    <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}" />
+                    <DataGridTextColumn Header="Active" Binding="{Binding Path=Active}" />
+                    <DataGridTextColumn Header="CPU usage" Binding="{Binding Path=Cpu}" />
+                    <DataGridTextColumn Header="Memory usage" Binding="{Binding Path=Memory}" />
+                    <DataGridTextColumn Header="Threads count" Binding="{Binding Path=ThreadsNumber}" />
+                    <DataGridTextColumn Header="User" Binding="{Binding Path=User}" />
+                    <DataGridTextColumn Header="Path" Binding="{Binding Path=Path}" />
+                    <DataGridTextColumn Header="Activity date" Binding="{Binding Path=Launch}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Grid Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition Height="20*"></RowDefinition>
+                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition Height="20*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Menu Grid.Row = "0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Green" >
+                <MenuItem Header="Sort" VerticalAlignment="Center"   FontSize="18" >
+                    <MenuItem Header="Sort by ID" Command="{Binding SortById}"></MenuItem>
+                    <MenuItem Header="Sort by process name" Command="{Binding SortByName}"></MenuItem>
+                    <MenuItem Header="Sort by IsActive" Command="{Binding SortByActiveness}"></MenuItem>
+                    <MenuItem Header="Sort by % of CPU" Command="{Binding SortByCpus}"></MenuItem>
+                    <MenuItem Header="Sort by RAM amount" Command="{Binding SortByRam}"></MenuItem>
+                    <MenuItem Header="Sort by threads number" Command="{Binding SortByThreads}"></MenuItem>
+                    <MenuItem Header="Sort by user" Command="{Binding SortByUser}"></MenuItem>
+                    <MenuItem Header="Sort by filepath" Command="{Binding SortByPath}"></MenuItem>
+                    <MenuItem Header="Sort by starting time" Command="{Binding SortByTime}"></MenuItem>
+                </MenuItem>
+            </Menu>
+            <Button Grid.Row="1" Content="End process"  FontSize="16" FontWeight="UltraBold"
+                    VerticalAlignment="Center" Background="Brown" 
+                    IsEnabled="{Binding IsSelected, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                    Command="{Binding EndProcessCommand}"></Button>
+            <Label Grid.Row="2" Content="Modules" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"></Label>
+            <DataGrid Grid.Row="3" 
+                      Background="Transparent"
+                      CanUserSortColumns="False" IsReadOnly="True"
+                      AutoGenerateColumns="False" FontSize="12" MaxColumnWidth="200"
+                      ItemsSource="{Binding Selected.Modules, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding Selected, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Width="*" IsReadOnly="True" Binding="{Binding Name}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="File Path" Width="*" IsReadOnly="True" Binding="{Binding FilePath}"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Label Grid.Row="4" Content="Threads" HorizontalAlignment="Center"  FontSize="18" FontWeight="Bold"></Label>
+            <DataGrid Grid.Row="5" 
+                      HorizontalGridLinesBrush="DarkBlue"
+                      Background="Transparent"
+                      CanUserSortColumns="False" IsReadOnly="True"
+                      AutoGenerateColumns="False" FontSize="12" MaxColumnWidth="200"
+                      ItemsSource="{Binding Selected.Threads, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding Selected, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Width="*" IsReadOnly="True" Binding="{Binding Id}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="State" Width="2*" IsReadOnly="True" Binding="{Binding ThreadState}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Created On" Width="3*" IsReadOnly="True" Binding="{Binding Launch}"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Window>
